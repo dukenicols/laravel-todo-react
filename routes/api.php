@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\TaskController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,4 +30,6 @@ Route::group([
     Route::get("profile", [AuthController::class, "profile"]);
     Route::get("refresh", [AuthController::class, "refreshToken"]);
     Route::get("logout", [AuthController::class, "logout"]);
+
+    Route::resource('tasks', TaskController::class);
 });

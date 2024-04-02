@@ -4,55 +4,40 @@ namespace App\Http\Controllers\Api;
 
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Models\User;
-use Illuminate\Support\Facades\Hash;
-use Tymon\JWTAuth\Facades\JWTAuth;
+use App\Http\Requests\LoginRequest;
+use App\Http\Requests\RegisterUserRequest;
+use App\Http\Resources\UserResource;
+use App\Services\UserService;
 
 class AuthController extends Controller
 {
-    public function register(Request $request){
 
-        // data validation
-        $request->validate([
-            "name" => "required",
-            "email" => "required|email|unique:users",
-            "password" => "required|confirmed"
-        ]);
+    protected $userService;
 
-        // User Model
-        User::create([
-            "name" => $request->name,
-            "email" => $request->email,
-            "password" => Hash::make($request->password)
-        ]);
+    public function __construct(UserService $userService)
+    {
+        $this->userService = $userService;
+    }
+
+    public function register(RegisterUserRequest $request){
+        $user = $this->userService->register($request->validated());
 
         // Response
         return response()->json([
             "status" => true,
-            "message" => "User registered successfully"
-        ]);
+            "message" => "User registered successfully",
+            "data" => new UserResource($user)
+        ], 201);
     }
 
-    public function login(Request $request){
-
-        // data validation
-        $request->validate([
-            "email" => "required|email",
-            "password" => "required"
-        ]);
-
+    public function login(LoginRequest $request){
         // JWTAuth
-        $token = JWTAuth::attempt([
-            "email" => $request->email,
-            "password" => $request->password
-        ]);
+        $token = $this->userService->login($request->validated());
 
         if(!empty($token)){
-
             return response()->json([
                 "status" => true,
-                "message" => "User logged in succcessfully",
+                "message" => "User logged in successfully",
                 "token" => $token
             ]);
         }
@@ -60,17 +45,16 @@ class AuthController extends Controller
         return response()->json([
             "status" => false,
             "message" => "Invalid details"
-        ]);
+        ], 422);
     }
 
     public function profile() {
 
         $userdata = auth()->user();
-
         return response()->json([
             "status" => true,
             "message" => "Profile data",
-            "data" => $userdata
+            "data" => new UserResource($userdata)
         ]);
     }
 

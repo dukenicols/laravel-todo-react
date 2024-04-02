@@ -27,4 +27,31 @@ class Handler extends ExceptionHandler
             //
         });
     }
+
+    public function render($request, Throwable $exception)
+    {
+        if ($request->wantsJson() || $request->is('api/*')) {
+            $status = method_exists($exception, 'getStatusCode')
+                ? $exception->getStatusCode() : 500;
+
+            $response = [
+                'success' => false,
+                'message' => $exception->getMessage(),
+            ];
+
+            if ($exception instanceof \Illuminate\Auth\AuthenticationException) {
+                $response['message'] = 'Unauthenticated.';
+            }
+
+            if ($exception instanceof \Illuminate\Validation\ValidationException) {
+                $status = 422;
+                $response['errors'] = $exception->errors();
+            }
+
+
+            return response()->json($response, $status);
+        }
+
+        return parent::render($request, $exception);
+    }
 }
