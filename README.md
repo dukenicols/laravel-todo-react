@@ -26,6 +26,7 @@ Exit the container by executing
 `exit`
 
 Run UI
+`nvm use`
 `npm install`
 `npm run dev`
 
