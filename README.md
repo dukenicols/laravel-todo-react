@@ -22,6 +22,9 @@ While still inside the app container, migrate the database:
 Generate a Laravel Application Key:
 `php artisan key:generate`
 
+Generate a JWT secret Key:
+`php artisan jwt:secret`
+
 Exit the container by executing
 `exit`
 
