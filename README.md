@@ -7,6 +7,9 @@ To run make sure docker and docker compose are installed
 Run to bootstrap:
 `docker compose up -d`
 
+Make sure to copy .env.example
+`cp .env.example .env`
+
 To configure the project, access the app container:
 `docker compose exec app bash`
 
@@ -18,6 +21,9 @@ While still inside the app container, migrate the database:
 
 Generate a Laravel Application Key:
 `php artisan key:generate`
+
+Exit the container by executing
+`exit`
 
 Run UI
 `npm install`
