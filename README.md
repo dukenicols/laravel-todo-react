@@ -22,3 +22,5 @@ Generate a Laravel Application Key:
 Run UI
 `npm install`
 `npm run dev`
+
+Nginx Reverse Proxy will bind to port 80, make sure it's available :)
