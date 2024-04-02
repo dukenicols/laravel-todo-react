@@ -1,0 +1,91 @@
+.container {
+    background-color: $white-color;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 400px;
+
+    .list {
+        max-height: 400px;
+        overflow-y: auto;
+    }
+}
+
+
+.add-task-btn, .remove-task-btn {
+    @include button-style($primary-color);
+}
+
+.remove-task-btn {
+    @include button-style($danger-color);
+}
+
+.add-task-input {
+    border: 2px solid $primary-color;
+    border-radius: 5px;
+    padding: 10px;
+    width: calc(100% - 24px);
+}
+
+.todo-item {
+    @include flex-center-vertical;
+    justify-content: space-between;
+    background-color: lighten($primary-color, 41);
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: $border-radius;
+    box-shadow: 0 2px 4px rgba(52, 152, 219, 0.15);
+    width: calc(100% - 30px);
+
+    input[type="checkbox"] {
+        flex-shrink: 0;
+    }
+
+    > div {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 70%;
+        margin-right: 10px;
+        margin-left: 10px;
+    }
+
+    p {
+        margin: 0;
+        color: $text-color;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        &:first-child {
+            font-weight: bold;
+            word-break: break-word;
+        }
+    }
+
+    &.completed {
+        p {
+            text-decoration: line-through;
+        }
+    }
+
+    button {
+        background-color: $danger-color;
+        color: white;
+        border: none;
+        padding: 8px 15px;
+        border-radius: $border-radius;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+        flex-shrink: 0;
+
+        &:hover {
+            background-color: darken($danger-color, 10%);
+        }
+    }
+}
+
+.profile {
+    @include flex-center-vertical;
+    justify-content: space-between;
+    padding: 10px 0;
+}

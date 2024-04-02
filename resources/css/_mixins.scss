@@ -1,0 +1,39 @@
+
+@mixin flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin button-style($bg-color) {
+    background-color: $bg-color;
+    color: $light-color;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    &:hover {
+        opacity: 0.9;
+    }
+}
+
+@mixin form-element {
+    border: 1px solid $border-color;
+    border-radius: 4px;
+    font-size: 16px;
+    padding: $padding-base;
+    margin-top: 5px;
+    margin-bottom: 20px;
+    width: 100%;
+    box-sizing: border-box;
+
+    &:focus {
+        border-color: $primary-color;
+        outline: none;
+    }
+}
+
+@mixin flex-center-vertical {
+    display: flex;
+    align-items: center;
+}

@@ -17,8 +17,8 @@ class UserService
     public function login($attributes)
     {
         $token = JWTAuth::attempt([
-            "email" => $attributes->email,
-            "password" => $attributes->password
+            "email" => $attributes['email'],
+            "password" => $attributes['password']
         ]);
 
         return $token;

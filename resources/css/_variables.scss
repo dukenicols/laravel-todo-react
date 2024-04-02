@@ -1,0 +1,13 @@
+$primary-color: #3498db;
+$secondary-color: #2ecc71;
+$danger-color: #e74c3c;
+$light-color: lighten($primary-color, 35);
+$white-color: #fff;
+$text-color: #2c3e50;
+$background-color: #ecf0f1;
+$border-radius: 4px;
+
+
+$hover-color: darken($primary-color, 10%);
+$border-color: #bdc3c7;
+$padding-base: 10px;

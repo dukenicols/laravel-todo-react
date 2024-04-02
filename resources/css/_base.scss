@@ -1,0 +1,41 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: $light-color;
+    color: $text-color;
+    @include flex-center;
+    flex-direction: column;
+    height: 100vh;
+    margin: 0;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+input[type="text"],
+input[type="password"],
+textarea {
+    @include form-element;
+    resize: none;
+}
+
+button[type="submit"] {
+    @include form-element;
+    background-color: $primary-color;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    border: none;
+
+    &:hover {
+        background-color: $hover-color;
+    }
+}
+
+.error {
+    color: $danger-color;
+}
